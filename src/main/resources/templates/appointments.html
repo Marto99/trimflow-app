@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} ?: 'Appointments | TrimFlow'">Appointments | TrimFlow</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-page">
+
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="main-content">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <section class="dashboard">
+        <div class="page-header">
+            <div>
+                <h1>Appointments</h1>
+                <p class="subtitle">Manage bookings and client visits.</p>
+            </div>
+            <a th:href="@{/appointments/create}" class="btn btn-gold">New Appointment</a>
+        </div>
+
+        <div class="panel">
+            <table>
+                <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Phone</th>
+                    <th>Barber</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment : ${appointments}">
+                    <td th:text="${appointment.customer.fullName}">Ivan Petrov</td>
+                    <td th:text="${appointment.customer.phone}">0888123456</td>
+                    <td th:text="${appointment.barber.fullName}">George</td>
+                    <td th:text="${appointment.hairService.name}">Haircut</td>
+                    <td th:text="${appointment.appointmentDate}">2026-06-27</td>
+                    <td th:text="${appointment.startTime}">14:30</td>
+                    <td><span class="status" th:classappend="${#strings.toLowerCase(appointment.status.name())}" th:text="${appointment.status}">CONFIRMED</span></td>
+                    <td class="table-actions">
+                        <a th:href="@{/appointments/{id}/edit(id=${appointment.id})}">Edit</a>
+                        <a th:href="@{/appointments/{id}/cancel(id=${appointment.id})}">Cancel</a>
+                    </td>
+                </tr>
+                <tr th:if="${appointments == null or #lists.isEmpty(appointments)}">
+                    <td colspan="8" class="empty-state">No appointments found.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

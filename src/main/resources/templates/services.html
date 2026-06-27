@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} ?: 'Services | TrimFlow'">Services | TrimFlow</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-page">
+
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="main-content">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <section class="dashboard">
+        <div class="page-header">
+            <div>
+                <h1>Services</h1>
+                <p class="subtitle">Manage prices and duration.</p>
+            </div>
+            <a th:href="@{/services/create}" class="btn btn-gold">Add Service</a>
+        </div>
+
+        <div class="cards-grid">
+            <div class="service-card" th:each="service : ${services}">
+                <h3 th:text="${service.name}">Fade Cut</h3>
+                <p th:text="${service.description}">Sharp modern fade haircut.</p>
+                <div class="service-meta">
+                    <span th:text="${service.price} + ' лв'">35 лв</span>
+                    <span th:text="${service.durationMinutes} + ' min'">45 min</span>
+                </div>
+                <div class="card-actions">
+                    <a th:href="@{/services/{id}/edit(id=${service.id})}">Edit</a>
+                </div>
+            </div>
+
+            <div class="empty-card" th:if="${services == null or #lists.isEmpty(services)}">
+                No services added yet.
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

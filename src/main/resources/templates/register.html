@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} ?: 'Register | TrimFlow'">Register | TrimFlow</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="auth-page">
+
+<div class="auth-card large">
+    <a th:href="@{/}" class="auth-logo">Trim<span>Flow</span></a>
+
+    <h1>Create your barbershop</h1>
+    <p>Start managing your shop with TrimFlow</p>
+
+    <div th:if="${errorMessage}" class="alert alert-error" th:text="${errorMessage}">Error message</div>
+
+    <form th:action="@{/register}" method="post" th:object="${registerRequest}">
+        <div class="form-group">
+            <label for="barbershopName">Barbershop Name</label>
+            <input id="barbershopName" type="text" th:field="*{barbershopName}" name="barbershopName" placeholder="Royal Cuts Studio" required>
+            <small th:if="${#fields.hasErrors('barbershopName')}" th:errors="*{barbershopName}">Shop name error</small>
+        </div>
+
+        <div class="form-group">
+            <label for="ownerName">Owner Name</label>
+            <input id="ownerName" type="text" th:field="*{ownerName}" name="ownerName" placeholder="John Carter" required>
+            <small th:if="${#fields.hasErrors('ownerName')}" th:errors="*{ownerName}">Owner name error</small>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" th:field="*{email}" name="email" placeholder="owner@trimflow.com" required>
+            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</small>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" th:field="*{password}" name="password" placeholder="••••••••" required>
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</small>
+        </div>
+
+        <button type="submit" class="btn btn-gold full">Create Account</button>
+    </form>
+
+    <div class="auth-footer">
+        Already have an account?
+        <a th:href="@{/login}">Login</a>
+    </div>
+</div>
+
+</body>
+</html>

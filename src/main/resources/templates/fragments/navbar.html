@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="navbar" class="topbar">
+    <div>
+        <div class="topbar-title" th:text="${pageHeading} ?: 'TrimFlow Dashboard'">TrimFlow Dashboard</div>
+        <div class="topbar-subtitle" th:text="${barbershopName} ?: 'Royal Cuts Studio'">Royal Cuts Studio</div>
+    </div>
+
+    <div class="topbar-actions">
+        <span class="user-badge" th:text="${loggedUserName} ?: 'Admin'">Admin</span>
+        <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
+    </div>
+</nav>
+</body>
+</html>

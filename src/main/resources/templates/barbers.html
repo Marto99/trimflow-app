@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} ?: 'Barbers | TrimFlow'">Barbers | TrimFlow</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-page">
+
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="main-content">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <section class="dashboard">
+        <div class="page-header">
+            <div>
+                <h1>Barbers</h1>
+                <p class="subtitle">Manage your team.</p>
+            </div>
+            <a th:href="@{/barbers/create}" class="btn btn-gold">Add Barber</a>
+        </div>
+
+        <div class="cards-grid">
+            <div class="profile-card" th:each="barber : ${barbers}">
+                <div class="avatar" th:text="${#strings.substring(barber.fullName,0,1)}">G</div>
+                <h3 th:text="${barber.fullName}">George Miller</h3>
+                <p th:text="${barber.specialization} ?: 'Barber specialist'">Fade specialist</p>
+                <span class="status" th:classappend="${barber.active} ? 'confirmed' : 'cancelled'" th:text="${barber.active} ? 'Active' : 'Inactive'">Active</span>
+                <div class="card-actions">
+                    <a th:href="@{/barbers/{id}/edit(id=${barber.id})}">Edit</a>
+                </div>
+            </div>
+
+            <div class="empty-card" th:if="${barbers == null or #lists.isEmpty(barbers)}">
+                No barbers added yet.
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
