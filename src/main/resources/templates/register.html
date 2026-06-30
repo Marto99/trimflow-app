@@ -16,17 +16,17 @@
 
     <div th:if="${errorMessage}" class="alert alert-error" th:text="${errorMessage}">Error message</div>
 
-    <form th:action="@{/register}" method="post" th:object="${registerRequest}">
+    <form th:action="@{/register}" th:object="${barbershopRegisterRequest}" th:method="post">
         <div class="form-group">
             <label for="barbershopName">Barbershop Name</label>
-            <input id="barbershopName" type="text" th:field="*{barbershopName}" name="barbershopName" placeholder="Royal Cuts Studio" required>
-            <small th:if="${#fields.hasErrors('barbershopName')}" th:errors="*{barbershopName}">Shop name error</small>
+            <input id="barbershopName" type="text" th:field="*{name}" name="barbershopName" placeholder="Royal Cuts Studio" required>
+            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Shop name error</small>
         </div>
 
         <div class="form-group">
             <label for="ownerName">Owner Name</label>
-            <input id="ownerName" type="text" th:field="*{ownerName}" name="ownerName" placeholder="John Carter" required>
-            <small th:if="${#fields.hasErrors('ownerName')}" th:errors="*{ownerName}">Owner name error</small>
+            <input id="ownerName" type="text" th:field="*{owner}" name="ownerName" placeholder="John Carter" required>
+            <small th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">Owner name error</small>
         </div>
 
         <div class="form-group">

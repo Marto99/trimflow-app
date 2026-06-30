@@ -17,7 +17,7 @@
     <div th:if="${errorMessage}" class="alert alert-error" th:text="${errorMessage}">Invalid credentials</div>
     <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}">Success message</div>
 
-    <form th:action="@{/login}" method="post" th:object="${loginRequest}">
+    <form th:action="@{/login}" method="post" th:object="${barbershopLoginRequest}">
         <div class="form-group">
             <label for="email">Email</label>
             <input id="email" type="email" th:field="*{email}" name="email" placeholder="admin@trimflow.com" required>
